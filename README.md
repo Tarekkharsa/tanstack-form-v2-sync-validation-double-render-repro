@@ -2,6 +2,9 @@
 
 A minimal Vite + React app. On `@tanstack/react-form` 2.0.0-alpha.3, a field with a synchronous change validator renders about twice per keystroke: once for the new value, then again a microtask later for the validation result. That holds for a plain function validator and for a Standard Schema that validates synchronously. On 1.33.5, the same field renders once per keystroke.
 
+- Issue: https://github.com/TanStack/form/issues/2446
+- Fix: https://github.com/TanStack/form/pull/2447
+
 ## Versions
 
 | Package | Version |
@@ -60,7 +63,7 @@ So the value change renders with `isValidating: true`, and the result plus `isVa
 
 ## With a fix
 
-The same pattern applied to change and blur validation (apply a synchronous result immediately, go asynchronous only when a validator returns a promise or is debounced) brings v2 back to one render per keystroke. Overriding only `@tanstack/form-core` with a build of that change gives:
+The same pattern applied to change and blur validation (apply a synchronous result immediately, go asynchronous only when a validator returns a promise or is debounced) brings v2 back to one render per keystroke. [TanStack/form#2447](https://github.com/TanStack/form/pull/2447) makes that change. Overriding only `@tanstack/form-core` with a build of it gives:
 
 ```
 @tanstack/react-form 2.0.0-alpha.3
